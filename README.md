@@ -14,6 +14,20 @@ Before: ![Before isolating test](img/isolate-before.png)
 
 After: ![After isolating test](img/isolate-after.png)
 
+### Add a tag to the current section for execution:
+
+Before: ![Before adding tag to section](img/add-tag-before.png)
+
+After: ![After adding tag to section](img/add-tag-after.png)
+
+### Copy previous table header
+
+Before: ![Before copying previous table header](img/copy-table-header-before.png)
+
+After: ![After copying previous table header](img/copy-table-header-after.png)
+
+When allows you to make the edit you want to more quickly: ![Final after copying previous table header](img/copy-table-header-final.png)
+
 ## Disclaimer
 
 There's currently no error handling. So it assumes your cursor is in a place that makes sense for the given action, and also assumes your .feature file is formatted as expected (for example, in a way that `prettier --check` would accept).
