@@ -2,10 +2,15 @@ local M = {}
 
 local default_tag = '@mycustomtag'
 local user_tag = nil
+local auto_save = false
 
 function M.setup(config)
     if config and config.tag then
         user_tag = config.tag
+    end
+
+    if config and config.auto_save ~= nil then
+        auto_save = config.auto_save
     end
 end
 
@@ -42,7 +47,9 @@ function M.isolate_test(tag)
     end
 
     vim.api.nvim_win_set_cursor(0, {starting_line + 1, 0})
-    vim.cmd(':w')
+    if auto_save then
+        vim.cmd(':w')
+    end
 end
 
 -- add tag to the top of the current section
@@ -53,7 +60,9 @@ function M.add_tag_to_section(tag)
     vim.cmd('normal! {')
     vim.cmd('normal! o' .. tag_to_use)
     vim.api.nvim_win_set_cursor(0, {starting_line + 1, 0})
-    vim.cmd(':w')
+    if auto_save then
+        vim.cmd(':w')
+    end
 end
 
 -- add Example lines in cucumber file
@@ -81,7 +90,9 @@ function M.copy_table_header()
 
     -- now go to the new test line, and save
     vim.api.nvim_win_set_cursor(0, {1 + starting_line + header_row - empty_line_above_section, 0})
-    vim.cmd(':w')
+    if auto_save then
+        vim.cmd(':w')
+    end
 end
 
 return M
