@@ -34,4 +34,41 @@ function M.isolate_test()
     vim.cmd(':w')
 end
 
+-- add tag to the top of the current section
+function M.add_tag_to_section()
+    local starting_line = vim.fn.line('.')
+    vim.cmd('normal! {')
+    vim.cmd('normal! o@cj')
+    vim.api.nvim_win_set_cursor(0, {starting_line + 1, 0})
+    vim.cmd(':w')
+end
+
+-- add Example lines in cucumber file
+function M.copy_table_header()
+    local starting_line = vim.fn.line('.')
+
+    vim.cmd('normal! {')
+    local empty_line_above_section = vim.fn.line(".")
+
+    -- find the next line that starts with "|", which is the header row
+    local header_row = 0
+    for i = empty_line_above_section, vim.api.nvim_buf_line_count(0) do
+        if vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1]:find("|", 1, true) then
+            header_row = i
+            break
+        end
+    end
+
+    -- yank the lines we want
+    vim.cmd(':' .. empty_line_above_section .. ',' .. header_row .. 'y')
+
+    -- go to our test line and paste it in
+    vim.api.nvim_win_set_cursor(0, {starting_line, 0})
+    vim.cmd('normal! P')
+
+    -- now go to the new test line, and save
+    vim.api.nvim_win_set_cursor(0, {1 + starting_line + header_row - empty_line_above_section, 0})
+    vim.cmd(':w')
+end
+
 return M
