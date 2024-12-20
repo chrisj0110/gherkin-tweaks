@@ -6,7 +6,13 @@ Just some shortcuts for modifying .feature files
 
 ## Examples
 
-TODO
+### Isolate the current test for execution:
+
+Setup the test example under the current line to run in isolation:
+
+Before: ![Before isolating test](img/isolate-before.png)
+
+After: ![After isolating test](img/isolate-after.png)
 
 ## Disclaimer
 
