@@ -10,23 +10,37 @@ Just some shortcuts for modifying .feature files
 
 Setup the test example under the current line to run in isolation:
 
-Before: ![Before isolating test](img/isolate-before.png)
+Before:
 
-After: ![After isolating test](img/isolate-after.png)
+![Before isolating test](img/isolate-before.png)
+
+After:
+
+![After isolating test](img/isolate-after.png)
 
 ### Add a tag to the current section for execution:
 
-Before: ![Before adding tag to section](img/add-tag-before.png)
+Before:
 
-After: ![After adding tag to section](img/add-tag-after.png)
+![Before adding tag to section](img/add-tag-before.png)
+
+After:
+
+![After adding tag to section](img/add-tag-after.png)
 
 ### Copy previous table header
 
-Before: ![Before copying previous table header](img/copy-table-header-before.png)
+Before:
 
-After: ![After copying previous table header](img/copy-table-header-after.png)
+![Before copying previous table header](img/copy-table-header-before.png)
 
-When allows you to make the edit you want to more quickly: ![Final after copying previous table header](img/copy-table-header-final.png)
+After:
+
+![After copying previous table header](img/copy-table-header-after.png)
+
+Which allows you to make the edit you want to more quickly:
+
+![Final after copying previous table header](img/copy-table-header-final.png)
 
 ## Disclaimer
 
