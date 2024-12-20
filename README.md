@@ -44,7 +44,7 @@ Which allows you to make the edit you want to more quickly:
 
 ## Disclaimer
 
-There's currently no error handling. So it assumes your cursor is in a place that makes sense for the given action, and also assumes your .feature file is formatted as expected (for example, in a way that `prettier --check` would accept).
+This plugin currently has no error handling. So it assumes your cursor is in a place that makes sense for the given action, and also assumes your .feature file is formatted as expected (for example, in a way that `prettier --check` would accept).
 
 ## Installation
 
@@ -64,9 +64,17 @@ require('gherkin-tweaks').setup({
     auto_save = true, -- whether to save the buffer when called (defaults to `false`)
 })
 
-vim.keymap.set('n', '<leader>mi', require('gherkin-tweaks').isolate_test, { desc = 'Isolate just this gherkin test' })
-vim.keymap.set('n', '<leader>mj', require('gherkin-tweaks').add_tag_to_section, { desc = 'Add tag to the top of the current gherkin section' })
-vim.keymap.set('n', '<leader>me', require('gherkin-tweaks').copy_table_header, { desc = 'Copy the previous gherkin table header above the current line' })
+vim.keymap.set('n', '<leader>mi',
+  require('gherkin-tweaks').isolate_test,
+  { desc = 'Isolate just this gherkin test' })
+
+vim.keymap.set('n', '<leader>mj',
+  require('gherkin-tweaks').add_tag_to_section,
+  { desc = 'Add tag to the top of the current gherkin section' })
+
+vim.keymap.set('n', '<leader>me',
+  require('gherkin-tweaks').copy_table_header,
+  { desc = 'Copy the previous gherkin table header above the current line' })
 ```
 
 Or you can call functions directly, for example:
