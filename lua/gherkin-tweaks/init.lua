@@ -1,13 +1,24 @@
 local M = {}
 
+local default_tag = '@mycustomtag'
+local user_tag = nil
+
+function M.setup(config)
+    if config and config.tag then
+        user_tag = config.tag
+    end
+end
+
 vim = vim
 
--- add @cj and comment out all but current cucumber test
-function M.isolate_test()
+-- add a tag to the top of the current section and comment out all but current test
+function M.isolate_test(tag)
+    local tag_to_use = tag or user_tag or default_tag
+
     -- add tag
     local starting_line = vim.fn.line('.')
     vim.cmd('normal! {')
-    vim.cmd('normal! o@cj')
+    vim.cmd('normal! o' .. tag_to_use)
     local section_start_line = vim.fn.line(".")
 
     -- got the start line above, now get the end line
@@ -35,10 +46,12 @@ function M.isolate_test()
 end
 
 -- add tag to the top of the current section
-function M.add_tag_to_section()
+function M.add_tag_to_section(tag)
+    local tag_to_use = tag or user_tag or default_tag
+
     local starting_line = vim.fn.line('.')
     vim.cmd('normal! {')
-    vim.cmd('normal! o@cj')
+    vim.cmd('normal! o' .. tag_to_use)
     vim.api.nvim_win_set_cursor(0, {starting_line + 1, 0})
     vim.cmd(':w')
 end
