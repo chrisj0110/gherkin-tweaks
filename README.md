@@ -16,7 +16,7 @@ This plugin currently has no error handling. So it assumes your cursor is in a p
 
 Here is my current configuration using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
-```
+```lua
 return {
     "chrisj0110/gherkin-tweaks",
     config = function()
@@ -42,7 +42,9 @@ return {
 
 Or you can call functions directly, for example:
 
-`:lua require('gherkin-tweaks').isolate_test("@hello")`
+```lua
+:lua require('gherkin-tweaks').isolate_test("@hello")
+```
 
 Whether calling directly or using a mapping, you can choose to pass in an optional tag (like `@hello` above), or else it will use the one in your setup.
 
