@@ -1,0 +1,5 @@
+1. add a tag to the section under cursor
+
+2. isolate a test under cursor
+
+3. copy previous table header above cursor
