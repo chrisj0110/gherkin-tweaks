@@ -3,13 +3,13 @@
 ---@field auto_save boolean|nil whether to save the buffer once tweaking it
 local M = {}
 
----@string string|nil default tag to use if nothing else specified
+---@type string default tag to use if nothing else specified
 local default_tag = '@mycustomtag'
 
----@string string|nil tag to use from user's config
+---@type string|nil tag to use from user's config
 local user_tag = nil
 
----@string boolean whether to save the buffer once tweaking it
+---@type boolean whether to save the buffer once tweaking it
 local auto_save = false
 
 ---Set values based on user's configuration
