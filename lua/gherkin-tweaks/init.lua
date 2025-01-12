@@ -1,9 +1,19 @@
+---@class Config
+---@field tag string|nil custom tag to use
+---@field auto_save boolean|nil whether to save the buffer once tweaking it
 local M = {}
 
+---@string string|nil default tag to use if nothing else specified
 local default_tag = '@mycustomtag'
+
+---@string string|nil tag to use from user's config
 local user_tag = nil
+
+---@string boolean whether to save the buffer once tweaking it
 local auto_save = false
 
+---Set values based on user's configuration
+---@param config Config
 function M.setup(config)
     if config and config.tag then
         user_tag = config.tag
@@ -16,18 +26,28 @@ end
 
 vim = vim
 
--- add a tag to the top of the current section and comment out all but current test
+---get tag to use
+---@return string
+local function get_defualt_tag()
+    return user_tag or default_tag
+end
+
+---add a tag to the top of the current section and comment out all but current test
+---@param tag string|nil optional tag to use, overwrites defaults
 function M.isolate_test(tag)
-    local tag_to_use = tag or user_tag or default_tag
+    local tag_to_use = tag or get_defualt_tag()
 
     -- add tag
+    ---@type integer
     local starting_line = vim.fn.line('.')
     vim.cmd('normal! {')
     vim.cmd('normal! o' .. tag_to_use)
+    ---@type integer
     local section_start_line = vim.fn.line(".")
 
     -- got the start line above, now get the end line
     vim.cmd('normal! }')
+    ---@type integer
     local section_end_line = vim.fn.line(".")
 
     -- comment out all tests, but not the first line which has the column headers
@@ -39,6 +59,7 @@ function M.isolate_test(tag)
         else
             -- also don't comment out the test we want to run
             if i ~= starting_line + 1 then
+                ---@type string
                 local line = vim.fn.getline(i)
                 local updated_line = line:gsub("|", "# |", 1)
                 vim.fn.setline(i, updated_line)
@@ -52,10 +73,12 @@ function M.isolate_test(tag)
     end
 end
 
--- add tag to the top of the current section
+---add tag to the top of the current section
+---@param tag string|nil optional tag to use, overwrites defaults
 function M.add_tag_to_section(tag)
-    local tag_to_use = tag or user_tag or default_tag
+    local tag_to_use = tag or get_defualt_tag()
 
+    ---@type integer
     local starting_line = vim.fn.line('.')
     vim.cmd('normal! {')
     vim.cmd('normal! o' .. tag_to_use)
@@ -65,11 +88,13 @@ function M.add_tag_to_section(tag)
     end
 end
 
--- add Example lines in cucumber file
+---add Example lines in cucumber file
 function M.copy_table_header()
+    ---@type integer
     local starting_line = vim.fn.line('.')
 
     vim.cmd('normal! {')
+    ---@type integer
     local empty_line_above_section = vim.fn.line(".")
 
     -- find the next line that starts with "|", which is the header row

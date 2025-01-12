@@ -21,8 +21,8 @@ return {
     "chrisj0110/gherkin-tweaks",
     config = function()
         require('gherkin-tweaks').setup({
-            tag = '@cj',
-            auto_save = true,
+            tag = '@cj', -- defaults to '@mycustomtag'
+            auto_save = true, -- defaults to false
         })
 
         vim.keymap.set('n', '<leader>mi',
